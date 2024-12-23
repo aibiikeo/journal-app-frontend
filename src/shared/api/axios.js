@@ -1,19 +1,20 @@
 import axios from 'axios'
 
-export const BASE_URL = 'http://64.23.185.31:8080'
+// export const BASE_URL = 'http://64.23.185.31:8080'
+export const BASE_URL = 'http://localhost:8080'
 
 export const apiClient = axios.create({
   baseURL: BASE_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
+  // headers: {
+  //   'Content-Type': 'application/json',
+  // },
 });
 
 // Request Interceptor
 apiClient.interceptors.request.use((config) => {
   const token = localStorage.getItem('authToken');
   if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
+    config.headers.Authorization = `${token}`;
   }
   return config;
 }, (error) => {
